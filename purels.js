@@ -1,13 +1,14 @@
-var limestone = require("./limestone").SphinxClient();
+var limestone = require("./limestone").SphinxClient(),
+    sys = require("sys");
 
 // 9312 is standard Sphinx port
 limestone.connect(9312, function(err) {
     if (err) {
-        console.log('Connection error: ' + err);
+        sys.puts('Connection error: ' + err);
     }
-    console.log('Connected, sending query');
-    limestone.query({'query':'test', maxmatches:1, 'fieldweights': {'name': 80, 'body': 30}}, function(err, answer) {
+    sys.puts('Connected, sending query');
+    limestone.query({'query':'test', maxmatches: 10}, function(err, answer) {
         limestone.disconnect();
-        console.log("Extended search for 'test' yielded " + answer.match_count + " results: " + JSON.stringify(answer));
+        sys.puts("Extended search for 'test' yielded " + answer.match_count + " results: " + JSON.stringify(answer));
     });
 });

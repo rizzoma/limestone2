@@ -124,7 +124,7 @@ Buffer.makeWriter = function makeWriter() {
     lstring: function pushCstring(string) {
       var b = new Buffer(4);
       b.int32Write(Buffer.byteLength(string));
-	    data.push(b);
+      data.push(b);
       data.push(new Buffer(string, 'utf8'));
       return writer;
     },
